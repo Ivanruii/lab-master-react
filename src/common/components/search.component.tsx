@@ -1,27 +1,16 @@
+import React from "react";
 import { Button, Stack, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDebounce } from "../common/hooks/use-debounce.hook";
-import { useSearch } from "../common/hooks/use-search.hook";
+import { useDebounce } from "../hooks/use-debounce.hook";
 
 export const SearchInput: React.FC<{
   initialValue: string;
   searchFunction: (value: string) => void;
-  setPageFunction: (value: number) => void;
   showSearchButton?: boolean;
-}> = ({
-  initialValue,
-  searchFunction,
-  setPageFunction,
-  showSearchButton = true,
-}) => {
-  const [searchValue, setSearchValue] = useState(initialValue);
+}> = ({ initialValue, searchFunction, showSearchButton = true }) => {
+  const [searchValue, setSearchValue] = React.useState(initialValue);
   const debouncedSearchValue = useDebounce(searchValue, 500);
 
-  useEffect(() => {
-    setOrgName(initialValue);
-  }, [initialValue]);
-
-  useEffect(() => {
+  React.useEffect(() => {
     searchFunction(debouncedSearchValue);
   }, [debouncedSearchValue, searchFunction]);
 
@@ -37,7 +26,7 @@ export const SearchInput: React.FC<{
     <header style={{ marginTop: "1rem" }}>
       <Stack direction="row" alignItems="center" spacing={2}>
         <TextField
-          variant="outlined"
+          variant="standard"
           value={searchValue}
           size="small"
           placeholder="Search..."
@@ -52,6 +41,3 @@ export const SearchInput: React.FC<{
     </header>
   );
 };
-function setOrgName(initialValue: string) {
-  throw new Error("Function not implemented.");
-}

@@ -1,25 +1,35 @@
-import { Avatar, Button, Card, CardContent, Divider, Grid, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { switchRoutes } from "../core/router/routes";
 import { DefaultLayout } from "../layouts/default.layout";
-
 export const CharactersDetailScene: React.FC = () => {
   const location = useLocation();
   const character = location.state as Character;
-  const [episodes, setEpisodes] = useState<string[]>([]);
-  const [showAllEpisodes, setShowAllEpisodes] = useState(false);
+  const [episodes, setEpisodes] = React.useState<string[]>([]);
+  const [showAllEpisodes, setShowAllEpisodes] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (character) {
       const fetchEpisodes = async () => {
         try {
           const episodesData = await Promise.all(
-            character.episode.slice(0, showAllEpisodes ? character.episode.length : 3).map(async (episodeUrl) => {
-              const response = await fetch(episodeUrl);
-              const data = await response.json();
-              return data.name;
-            })
+            character.episode
+              .slice(0, showAllEpisodes ? character.episode.length : 3)
+              .map(async (episodeUrl) => {
+                const response = await fetch(episodeUrl);
+                const data = await response.json();
+                return data.name;
+              })
           );
           setEpisodes(episodesData);
         } catch (error) {
@@ -43,7 +53,10 @@ export const CharactersDetailScene: React.FC = () => {
             <Card>
               <CardContent>
                 <Stack direction="row" spacing={1} alignItems={"center"}>
-                  <Avatar src={character.image} alt={`${character.name} profile avatar`} />
+                  <Avatar
+                    src={character.image}
+                    alt={`${character.name} profile avatar`}
+                  />
                   <Typography variant="h5" component="div">
                     {character.name}
                   </Typography>
@@ -70,7 +83,9 @@ export const CharactersDetailScene: React.FC = () => {
               ))}
               {character && (
                 <Button variant="outlined" onClick={handleToggleEpisodes}>
-                  {showAllEpisodes ? "Show Less Episodes" : "Show More Episodes"}
+                  {showAllEpisodes
+                    ? "Show Less Episodes"
+                    : "Show More Episodes"}
                 </Button>
               )}
             </CardContent>
@@ -92,9 +107,9 @@ export const CharactersDetailScene: React.FC = () => {
           </Card>
         </Grid>
       </Grid>
-      <Link to={switchRoutes.githubOrgs}>
+      <Link to={switchRoutes.rickyMorty}>
         <Button variant="contained">Go Back!</Button>
       </Link>
-    </DefaultLayout >
+    </DefaultLayout>
   );
 };

@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import {
   CircularProgress,
   Paper,
@@ -6,9 +7,8 @@ import {
   TableContainer,
   TablePagination,
 } from "@mui/material";
-import React, { useContext } from "react";
 import { useQuery } from "react-query";
-import { OrganizationContext } from "../../providers/organization.provider";
+import { OrganizationContext } from "../../core/providers/organization.provider";
 import { MemberTableRows } from "./components/organization-members-table-rows.component";
 import { MemberTableHeader } from "./components/organization-members-table-header.component";
 
@@ -17,7 +17,6 @@ export const OrganizationMembersTablePod: React.FC = () => {
   const [page, setPage] = React.useState<number>(0);
   const [perPage, setPerPage] = React.useState<number>(10);
 
-  console.log(orgName);
   const { data: members = [], isLoading } = useQuery<Member[]>(
     ["members", orgName, page, perPage],
     async () => {
