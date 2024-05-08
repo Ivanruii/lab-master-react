@@ -7,14 +7,12 @@ export const LoginPageScene: React.FC = () => {
     useLogin();
 
   return (
-    <>
-      <LoginFormPod
-        username={username}
-        setUsername={setUsername}
-        password={password}
-        setPassword={setPassword}
-        handleNavigation={handleNavigation}
-      />
-    </>
+    <LoginFormPod
+      username={username}
+      setUsername={setUsername}
+      password={password}
+      setPassword={setPassword}
+      handleNavigation={handleNavigation}
+    />
   );
 };
