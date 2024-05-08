@@ -8,13 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   pageTitle: string;
-  searchComponent: React.ReactNode;
+  searchPod: React.ReactNode;
 }
 
-export const Header: React.FC<HeaderProps> = ({
-  pageTitle,
-  searchComponent,
-}) => {
+export const Header: React.FC<HeaderProps> = ({ pageTitle, searchPod }) => {
   const navigate = useNavigate();
 
   return (
@@ -41,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
             <Button color="inherit" onClick={() => navigate("/landing")}>
               Go Back Landing
             </Button>
-            {searchComponent}
+            {searchPod}
           </div>
         </Toolbar>
       </AppBar>
