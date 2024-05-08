@@ -1,17 +1,6 @@
 import React from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
-import { switchRoutes } from "../../core/router/routes";
-import { DefaultLayout } from "../../layouts/default.layout";
+import { useLocation } from "react-router-dom";
+import { CharacterDetailComponent } from "./character-detail.component";
 
 export const CharactersDetailPod: React.FC = () => {
   const location = useLocation();
@@ -46,71 +35,11 @@ export const CharactersDetailPod: React.FC = () => {
   };
 
   return (
-    <DefaultLayout>
-      <h2>Details Page</h2>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
-          {character && (
-            <Card>
-              <CardContent>
-                <Stack direction="row" spacing={1} alignItems={"center"}>
-                  <Avatar
-                    src={character.image}
-                    alt={`${character.name} profile avatar`}
-                  />
-                  <Typography variant="h5" component="div">
-                    {character.name}
-                  </Typography>
-                </Stack>
-                <Divider orientation="horizontal" variant="middle" flexItem />
-
-                <Typography>Status: {character.status}</Typography>
-                <Typography>Species: {character.species}</Typography>
-                <Typography>Gender: {character.gender}</Typography>
-                <Typography>Origin: {character.origin.name}</Typography>
-                <Typography>Location: {character.location.name}</Typography>
-              </CardContent>
-            </Card>
-          )}
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                Episodes
-              </Typography>
-              {episodes.map((episode, index) => (
-                <Typography key={index}>Episode: {episode}</Typography>
-              ))}
-              {character && (
-                <Button variant="outlined" onClick={handleToggleEpisodes}>
-                  {showAllEpisodes
-                    ? "Show Less Episodes"
-                    : "Show More Episodes"}
-                </Button>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                Other Details
-              </Typography>
-              <Typography>Type: {character?.type}</Typography>
-              <Typography>Dimension: {character?.dimension}</Typography>
-              <Typography>Created: {character?.created}</Typography>
-              <Typography>Episodes: {character?.episode.length}</Typography>
-              <Typography>URL: {character?.url}</Typography>
-              <Typography>ID: {character?.id}</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-      <Link to={switchRoutes.rickyMorty}>
-        <Button variant="contained">Go Back!</Button>
-      </Link>
-    </DefaultLayout>
+    <CharacterDetailComponent
+      character={character}
+      episodes={episodes}
+      handleToggleEpisodes={handleToggleEpisodes}
+      showAllEpisodes={showAllEpisodes}
+    />
   );
 };

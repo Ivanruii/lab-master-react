@@ -11,6 +11,7 @@ import { useQuery } from "react-query";
 import { OrganizationContext } from "../../core/providers/organization.provider";
 import { MemberTableRows } from "./components/organization-members-table-rows.component";
 import { MemberTableHeader } from "./components/organization-members-table-header.component";
+import { OrganizationMembersTableComponent } from "./organization-members-table.component";
 
 export const OrganizationMembersTablePod: React.FC = () => {
   const { orgName } = useContext(OrganizationContext);
@@ -50,27 +51,14 @@ export const OrganizationMembersTablePod: React.FC = () => {
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <>
-          <TableContainer component={Paper}>
-            <Table>
-              <MemberTableHeader />
-              <TableBody>
-                {filteredMembers.map((member) => (
-                  <MemberTableRows key={member.id} member={member} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={members.length}
-            rowsPerPage={perPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </>
+        <OrganizationMembersTableComponent
+          members={members}
+          filteredMembers={filteredMembers}
+          perPage={perPage}
+          page={page}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       )}
     </>
   );
