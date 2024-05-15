@@ -14,7 +14,7 @@ module.exports = {
   stats: "errors-only",
   output: {
     filename: "[name].[chunkhash].js",
-    publicPath: "/",
+    publicPath: "https://ivanruii.github.io/automatic-deploy-github-pages/",
   },
   devServer: {
     historyApiFallback: true,
