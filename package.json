@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://ivanruii.github.io/automatic-deploy-github-pages/",
   "scripts": {
     "start": "run-p -l type-check:watch start:dev",
     "type-check": "tsc --noEmit",
